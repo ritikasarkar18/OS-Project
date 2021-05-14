@@ -1,4 +1,8 @@
-﻿using System;
+﻿// File System Code for COSMOS OS (authored by Ritika, ref to COSMOS github documentation)
+// Configuration for Visual Studio and commit history deleted iniial commits by author
+// Collaborator @PratikGarai fixed the commit history issue supposed to be faced by collaborators
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
@@ -16,8 +20,7 @@ namespace CosmosKernel1
             
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs); //registers vfs at the vfs manager, making it usable
             Console.WriteLine("\nCosmos booted successfully. File System Initialized!");
-
-
+            
         }
 
         protected override void Run() // -- executes infinitely --
