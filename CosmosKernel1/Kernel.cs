@@ -14,7 +14,8 @@ namespace FirstOS
         public static string file;
         public bool FS = false;
         string current_path = @"0:\";
-        public bool SudoY = false;
+        public bool SudoY = true;
+
         public void deleteFile(string fname)
         {
             if (File.Exists(fname))
@@ -26,6 +27,7 @@ namespace FirstOS
                 Console.WriteLine("File doesn't exist!");
             }
         }
+
         public void deleteDirectory(string fname)
         {
             if (Directory.Exists(fname))
@@ -164,6 +166,7 @@ namespace FirstOS
                         Console.Clear();
                         break;
 
+                    /*
                     case "help":
                         Console.WriteLine("Help 1: Normal Commands");
                         Console.WriteLine("--------------------------------------------------------");
@@ -223,6 +226,7 @@ namespace FirstOS
                         Console.WriteLine("Open Text Editor = text_editor");
                         Console.WriteLine("date - gives the date and time of OS");
                         break;
+                    */
 
                     case "lock":
                         Console.Write("Set Passcode: ");
@@ -289,40 +293,42 @@ namespace FirstOS
                             Console.WriteLine("File System Not Enabled!");
                         }
                         break;
+
                     case "add": // Adds given numbers
                         string[] inputvarsa = vars.Split('#');
-                        Console.WriteLine(Calci.Add(inputvarsa[0], inputvarsa[1]));
+                        Console.WriteLine(Calculator.Add(inputvarsa[0], inputvarsa[1]));
                         break;
 
                     case "subtract": // Subtracts given numbers
                         string[] inputvarsb = vars.Split('#');
-                        Console.WriteLine(Calci.Subtract(inputvarsb[0], inputvarsb[1]));
+                        Console.WriteLine(Calculator.Subtract(inputvarsb[0], inputvarsb[1]));
                         break;
 
                     case "multiply": // Multiplys given numbers
                         string[] inputvarsc = vars.Split('#');
-                        Console.WriteLine(Calci.Multiply(inputvarsc[0], inputvarsc[1]));
+                        Console.WriteLine(Calculator.Multiply(inputvarsc[0], inputvarsc[1]));
                         break;
 
                     case "divide": // Divides given numbers
                         string[] inputvarsd = vars.Split('#');
-                        Console.WriteLine(Calci.Divide(inputvarsd[0], inputvarsd[1]));
+                        Console.WriteLine(Calculator.Divide(inputvarsd[0], inputvarsd[1]));
                         break;
 
                     case "power": // Raises given number to other given number
                         string[] inputvarse = vars.Split('#');
-                        Console.WriteLine(Calci.ToPower(inputvarse[0], inputvarse[1]));
+                        Console.WriteLine(Calculator.ToPower(inputvarse[0], inputvarse[1]));
                         break;
 
                     case "gcd": // Gives gcd conversion of given numbers
                         string[] inputvarsf = vars.Split('#');
-                        Console.WriteLine(Calci.GcdCon(inputvarsf[0], inputvarsf[1]));
+                        Console.WriteLine(Calculator.GcdCon(inputvarsf[0], inputvarsf[1]));
                         break;
 
                     case "lcm": // Gives lcm conversion of given numbers
                         string[] inputvarsg = vars.Split('#');
-                        Console.WriteLine(Calci.LcmCon(inputvarsg[0], inputvarsg[1]));
+                        Console.WriteLine(Calculator.LcmCon(inputvarsg[0], inputvarsg[1]));
                         break;
+
                     case "text_editor": //text_editor
                         Console.Clear();
                         File.AppendAllText(@"0:\history", input);
@@ -340,6 +346,8 @@ namespace FirstOS
                             Console.WriteLine(s);
                         }
                         break;
+
+                    /*
                     case "sudo": //Become sudo user
                         Console.Write("Enter sudo password?(Y/N)");
                         var sicuro = Console.ReadLine();
@@ -353,6 +361,8 @@ namespace FirstOS
                             SudoY = false;
                         }
                         break;
+                    */
+
                     case "dd": //delete directory
                         if (SudoY)
                         {
