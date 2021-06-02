@@ -6,7 +6,7 @@ namespace FirstOS
 
 {
 
-    class Calci
+    class Calculator
 
     {
         public static Int32 GcdCon(string number1, string number2)
