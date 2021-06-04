@@ -114,7 +114,7 @@ namespace FirstOS
                     }
                     Console.WriteLine("Press F12 to now exit from the text_editor");
                     break;
-                case ConsoleKey.F12: //Closes out of tdit
+                case ConsoleKey.F12: //Closes out of text editor
                     Console.Clear();
                     Console.WriteLine("Press F12 again if you see this."); // Kinda fixes it, bot not all the way.
                     return;

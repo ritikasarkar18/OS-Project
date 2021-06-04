@@ -108,14 +108,15 @@ namespace FirstOS
             }
             catch (Exception)
             {
-                goto fatto;
+                goto logouterr;
             }
-        fatto:
+        logouterr:
             Console.Clear();
             Console.WriteLine("                                                  ");
             Console.WriteLine("           Successfully Booted                    ");
             Console.WriteLine("                                                  ");
-        inizia:
+
+        loginerr:
             Console.WriteLine("Please enter password to log in! (Type N to shutdown)");
             var sino = Console.ReadLine();
             if (sino == pass)
@@ -127,7 +128,7 @@ namespace FirstOS
             {
                 Stop();
             }
-            else { goto inizia; }
+            else { goto loginerr; }
 
         }
 
@@ -166,83 +167,12 @@ namespace FirstOS
                         Console.Clear();
                         break;
 
-                    /*
-                    case "help":
-                        Console.WriteLine("Help 1: Normal Commands");
-                        Console.WriteLine("--------------------------------------------------------");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("reboot");
-                        Console.WriteLine("shutdown");
-                        Console.WriteLine("clear");
-                        Console.WriteLine("about");
-                        Console.WriteLine("lock");
-                        Console.WriteLine("his - opens the command history");
-                        Console.WriteLine("Page 2 (FileSystem) = help2");
-                        Console.WriteLine("Page 3 (Calculator) = help3");
-                        Console.WriteLine("Page 4 (Miscellaneous) = help4");
-                        break;
-
-                    case "help2":
-                        Console.WriteLine("Help 2: FileSystem");
-                        Console.WriteLine("--------------------------------------------------------");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("Go to specified directory = cd/directory");
-                        Console.WriteLine("Create directory = md/new directory's name");
-                        Console.WriteLine("Show current directories = dir");
-                        Console.WriteLine("Deletes the specified directory[sudo] = dd/directory*");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("*type helpdir to know what directories not to delete");
-                        Console.WriteLine("open file - Open a file and read it(should it exist)");
-                        Console.WriteLine("df - Deletes a file(should it exist)");
-                        Console.WriteLine("dd - Deletes the directory(should it exist)");
-                        Console.WriteLine("mv - moves the file to another directory");
-                        Console.WriteLine("cp - copies the file to another directory");
-                        Console.WriteLine("cat - concatenates two files");
-                        Console.WriteLine("search - search for a specific file in the entire system");
-                        Console.WriteLine("ds - find the current disk space");
-                        Console.WriteLine("recl - moves a file to the RecycleBin");
-                        Console.WriteLine("clcrecl - clears the RecycleBin");
-                        break;
-
-                    case "help3":
-                        Console.WriteLine("Help 3: Calculator*");
-                        Console.WriteLine("--------------------------------------------------------");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("Add two numbers together = add/num1#num2");
-                        Console.WriteLine("Subtract a number to an other = subtract/num1#num2");
-                        Console.WriteLine("Muliply two numbers together = multiply/num1#num2");
-                        Console.WriteLine("Divide one number with another number = divide/num1#num2");
-                        Console.WriteLine("One nuber to the power of another = power/num1#num2");
-                        Console.WriteLine("Least Common Number of two numbers = lcm/num1#num2");
-                        Console.WriteLine("Greatest Common Factor of two numbers = gcf/num1#num2");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("*it not works with decimals(0.1 for example)");
-                        break;
-
-                    case "help4":
-                        Console.WriteLine("Help 4 : Miscellaneous");
-                        Console.WriteLine("--------------------------------------------------------");
-                        Console.WriteLine("                                ");
-                        Console.WriteLine("Open Text Editor = text_editor");
-                        Console.WriteLine("date - gives the date and time of OS");
-                        break;
-                    */
-
-                    case "lock":
-                        Console.Write("Set Passcode: ");
-                        pass = Console.ReadLine();
-                        sys_lock.lockpass(pass);
-                        break;
-
-                    case "print":
-                        Console.WriteLine(vars);
-                        break;
 
                     case "about":
-                        Console.WriteLine("ArrowOS 1.0.0");
+                        Console.WriteLine("OS 1.0.0");
                         break;
 
-                    case "cd":
+                    case "chdir":
                         if (FS)
                         {
                             if (vars == "")
@@ -263,7 +193,7 @@ namespace FirstOS
                             Console.WriteLine("File System Not Enabled!");
                         }
                         break;
-                    case "md":  // Makes new directory
+                    case "mkdir":  // Makes new directory
                         if (FS)
 
                             {
@@ -275,7 +205,7 @@ namespace FirstOS
                             }
                         break;
 
-                    case "dir": // Displays current location
+                    case "ls": // Displays current location
                         if (FS)
                         {
                             string[] back = filesystem.readFiles(current_path);
@@ -335,7 +265,7 @@ namespace FirstOS
                         text_editor.init(current_path);
                         break;
 
-                    case "open file": //open a file
+                    case "open_file": //open a file
                         Console.WriteLine("Enter filename of file to read:");
                         var file = Console.ReadLine();
                         File.AppendAllText(@"0:\history", input + " " + file + "\n");
@@ -347,23 +277,8 @@ namespace FirstOS
                         }
                         break;
 
-                    /*
-                    case "sudo": //Become sudo user
-                        Console.Write("Enter sudo password?(Y/N)");
-                        var sicuro = Console.ReadLine();
-                        if (sicuro == pass)
-                        {
-                            SudoY = true;
-                            Console.WriteLine("Sudo Access Granted!");
-                        }
-                        else
-                        {
-                            SudoY = false;
-                        }
-                        break;
-                    */
 
-                    case "dd": //delete directory
+                    case "rmdir": //delete directory
                         if (SudoY)
                         {
                             Console.WriteLine("Enter name of directory to be deleted:");
@@ -453,20 +368,20 @@ namespace FirstOS
                             Console.WriteLine(answer);
                         }
                         break;
-                    case "recl":
+                    case "rm":
                         Console.WriteLine("Enter file to be moved to recycle bin:");
                         var reclFile = Console.ReadLine();
                         File.AppendAllText(@"0:\history", input + " " + reclFile + "\n");
                         moveFile(current_path, reclFile, @"0:\RecycleBin\");
                         break;
-                    case "clcrecl":
+                    case "clearbin":
                         File.AppendAllText(@"0:\history", input + "\n");
                         foreach (var fileRecl in Directory.GetFiles(@"0:\RecycleBin\"))
                         {
                             deleteFile(@"0:\RecycleBin\" + fileRecl);
                         }
                         break;
-                    case "his":
+                    case "history":
                         string[] readHis;
                         readHis = File.ReadAllLines(@"0:\history");
                         foreach (string s in readHis)
