@@ -10,9 +10,9 @@ namespace FirstOS
     public class Kernel : Sys.Kernel
     {
         string pass = "abc123";
-        string error = "Unknown command. For complete list of commands, use HELP";
+        string error = "Unknown command";
         public static string file;
-        public bool FS = false;
+        public bool FS = true;
         string current_path = @"0:\";
         public bool SudoY = true;
 
@@ -142,10 +142,10 @@ namespace FirstOS
             var input = Console.ReadLine();
             var co = input;
             var vars = "";
-            if (input.ToLower().IndexOf('/') != -1)
+            if (input.ToLower().IndexOf(' ') != -1)
             {
 
-                string[] parts = input.Split('/');
+                string[] parts = input.Split(' ');
                 co = parts[0];
                 vars = parts[1];
             }
@@ -225,37 +225,37 @@ namespace FirstOS
                         break;
 
                     case "add": // Adds given numbers
-                        string[] inputvarsa = vars.Split('#');
+                        string[] inputvarsa = vars.Split('+');
                         Console.WriteLine(Calculator.Add(inputvarsa[0], inputvarsa[1]));
                         break;
 
                     case "subtract": // Subtracts given numbers
-                        string[] inputvarsb = vars.Split('#');
+                        string[] inputvarsb = vars.Split('-');
                         Console.WriteLine(Calculator.Subtract(inputvarsb[0], inputvarsb[1]));
                         break;
 
                     case "multiply": // Multiplys given numbers
-                        string[] inputvarsc = vars.Split('#');
+                        string[] inputvarsc = vars.Split('*');
                         Console.WriteLine(Calculator.Multiply(inputvarsc[0], inputvarsc[1]));
                         break;
 
                     case "divide": // Divides given numbers
-                        string[] inputvarsd = vars.Split('#');
+                        string[] inputvarsd = vars.Split('/');
                         Console.WriteLine(Calculator.Divide(inputvarsd[0], inputvarsd[1]));
                         break;
 
                     case "power": // Raises given number to other given number
-                        string[] inputvarse = vars.Split('#');
+                        string[] inputvarse = vars.Split('^');
                         Console.WriteLine(Calculator.ToPower(inputvarse[0], inputvarse[1]));
                         break;
 
                     case "gcd": // Gives gcd conversion of given numbers
-                        string[] inputvarsf = vars.Split('#');
+                        string[] inputvarsf = vars.Split(',');
                         Console.WriteLine(Calculator.GcdCon(inputvarsf[0], inputvarsf[1]));
                         break;
 
                     case "lcm": // Gives lcm conversion of given numbers
-                        string[] inputvarsg = vars.Split('#');
+                        string[] inputvarsg = vars.Split(',');
                         Console.WriteLine(Calculator.LcmCon(inputvarsg[0], inputvarsg[1]));
                         break;
 
@@ -388,6 +388,7 @@ namespace FirstOS
                         {
                             Console.WriteLine(s);
                         }
+                        Console.WriteLine();
                         break;
 
                     default:
