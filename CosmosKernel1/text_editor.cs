@@ -116,7 +116,7 @@ namespace FirstOS
                     break;
                 case ConsoleKey.F12: //Closes out of text editor
                     Console.Clear();
-                    Console.WriteLine("Press F12 again if you see this."); // Kinda fixes it, bot not all the way.
+                    Console.WriteLine("Press F12 again if you see this."); // Kinda fixes it, but not all the way.
                     return;
                 default:
                     insertData = insertData + pressed_key.KeyChar.ToString();

@@ -138,6 +138,8 @@ namespace FirstOS
             {
                 Directory.CreateDirectory(@"0:\RecycleBin");
             }
+
+            Console.WriteLine();
             Console.Write(current_path + "@root: ");
             var input = Console.ReadLine();
             var co = input;
